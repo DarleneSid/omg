@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 15:21:21 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/09 23:35:19 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 13:40:47 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ void	*print_msg(t_philo *philo, char *str)
 	return (NULL);
 }
 
-void	*die_right_fork(void *arg)
+void	*die_right_fork(t_philo	*philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
 	if (print_msg(philo, "taken a fork"))
 	{
 		pthread_mutex_unlock(philo->r_spoon);
@@ -48,11 +45,8 @@ void	*die_right_fork(void *arg)
 	return (NULL);
 }
 
-void	*right_fork(void *arg)
+void	*right_fork(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->r_spoon);
 	if (print_msg(philo, "taken a fork"))
 	{
@@ -78,11 +72,8 @@ void	*right_fork(void *arg)
 	return (NULL);
 }
 
-void	*die_left_fork(void *arg)
+void	*die_left_fork(t_philo	*philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
 	if (print_msg(philo, "taken a fork"))
 	{
 		pthread_mutex_unlock(philo->l_spoon);
@@ -98,11 +89,8 @@ void	*die_left_fork(void *arg)
 	return (NULL);
 }
 
-void	*left_fork(void *arg)
+void	*left_fork(t_philo	*philo)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
 	pthread_mutex_lock(philo->l_spoon);
 	if (print_msg(philo, "taken a fork"))
 	{

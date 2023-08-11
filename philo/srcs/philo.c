@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:19:10 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/11 13:13:06 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:41:52 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,29 @@ void	*setting_time(void *arg)
 void	init(t_data *data, char **av, int ac)
 {
 	data->t_t_die = ft_atoi(av[2]);
-	data->t_t_sleep = ft_atoi(av[4]);
-	data->t_t_eat = ft_atoi(av[3]);
+	data->t_t_sleep = ft_atoi(av[3]);
+	data->t_t_eat = ft_atoi(av[4]);
 	data->max_eat = -1;
 	if (ac == 6)
 		data->max_eat = ft_atoi(av[5]);
 	data->need_to_eat = data->nb_philo;
 	data->death = 1;
+}
+
+int	lets_malloc(t_data *data, t_philo *philo)
+{
+	data->phils = malloc(sizeof(pthread_t) * data->nb_philo);
+	if (!data->phils)
+		return (free(philo), 1);
+	data->check_time = malloc(sizeof(pthread_t) * data->nb_philo);
+	if (!data->check_time)
+		return (free(philo), 1);
+	data->spoon = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!data->spoon)
+		return (free(philo), free(data->phils), 1);
+	data->set_to_zero = gettodaystime();
+	data->philo = philo;
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -95,25 +111,16 @@ int	main(int ac, char **av)
 	philo = calloc(sizeof(t_philo), data.nb_philo);
 	if (!philo)
 		return (1);
-	data.phils = malloc(sizeof(pthread_t) * data.nb_philo);
-	if (!data.phils)
-		return (free(philo), 1);
-	data.check_time = malloc(sizeof(pthread_t) * data.nb_philo);
-	if (!data.check_time)
-		return (free(philo), 1);
-	data.spoon = malloc(sizeof(pthread_mutex_t) * data.nb_philo);
-	if (!data.spoon)
-		return (free(philo), free(data.phils), 1);
-	i = 0;
-	data.set_to_zero = gettodaystime();
-	data.philo = philo;
+	if (lets_malloc(&data, philo))
+		return (1);
 	init(&data, av, ac);
+	i = 0;
 	while (i < data.nb_philo)
 		pthread_mutex_init(&data.spoon[i++], NULL);
-	i = 0;
 	pthread_mutex_init(&data.print, NULL);
 	pthread_mutex_init(&data.eatchecker, NULL);
 	pthread_mutex_init(&data.deathchecker, NULL);
+	i = 0;
 	while (i < data.nb_philo)
 	{
 		philo[i].id = i + 1;

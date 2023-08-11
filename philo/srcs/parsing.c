@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:21:08 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/11 12:54:58 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:44:49 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_valid_args(char **av)
 long long int	ft_atoi(char *n)
 {
 	long long int	res;
-	int	i;
+	int				i;
 
 	res = 0;
 	i = 0;
@@ -89,4 +89,15 @@ int	check_amount_ph(int ac, char **av)
 		i++;
 	}
 	return (0);
+}
+
+void	*just_one_philo(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	print_msg(philo, "taken a fork");
+	my_usleep(philo->data->t_t_die, philo);
+	print_msg(philo, "died");
+	return (NULL);
 }

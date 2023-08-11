@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:18:33 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/11 12:39:45 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:48:11 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,30 @@ typedef struct t_philo
 }				t_philo;
 
 /*		PARSING		*/
-int			check_valid_args(char **av);
-long long int			ft_atoi(char *n);
-int			check_amount_ph(int ac, char **av);
+int				len_arg(char *s);
+int				check_valid_args(char **av);
+long long int	ft_atoi(char *n);
+int				check_amount_ph(int ac, char **av);
+void			*just_one_philo(void *arg);
 
 /*		PHILO		*/
-long int	gettodaystime(void);
-void		*setting_time(void *arg);
-void		init(t_data *data, char **av, int ac);
-int	my_usleep(long int duration, t_philo *philo);
+long int		gettodaystime(void);
+void			*setting_time(void *arg);
+void			init(t_data *data, char **av, int ac);
+int				my_usleep(long int duration, t_philo *philo);
 
 /*		FORKS		*/
-void		*print_msg(t_philo *philo, char *str);
-void		*die_right_fork(void *arg);
-void		*right_fork(void *arg);
-void		*die_left_fork(void *arg);
-void		*left_fork(void *arg);
+void			*print_msg(t_philo *philo, char *str);
+void			*die_right_fork(t_philo	*philo);
+void			*right_fork(t_philo *philo);
+void			*die_left_fork(t_philo	*philo);
+void			*left_fork(t_philo	*philo);
 
 /*		PROCESS		*/
-void		*food_check(t_data *data);
-void		*process_func(void *arg);
-void		*check_time_pass(void *arg);
-void		*just_one_philo(void *arg);
+void			*food_check(t_data *data);
+void			*case_death(t_data *data);
+void			*check_time_pass(void *arg);
+void			*death_check(t_philo *philo);
+void			*process_func(void *arg);
 
 #endif

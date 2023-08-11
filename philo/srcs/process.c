@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:49:29 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/10 00:03:52 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 14:44:42 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ void	*food_check(t_data *data)
 	return (NULL);
 }
 
+void	*case_death(t_data *data)
+{
+	pthread_mutex_lock(&data->deathchecker);
+	data->death = 0;
+	pthread_mutex_unlock(&data->deathchecker);
+	return (NULL);
+}
+
 void	*check_time_pass(void *arg)
 {
 	t_data	*data;
@@ -44,12 +52,11 @@ void	*check_time_pass(void *arg)
 			{
 				pthread_mutex_unlock(&data->philo[i].lunchchecker);
 				print_msg(data->philo, "died");
-				pthread_mutex_lock(&data->deathchecker);
-				data->death = 0;
-				pthread_mutex_unlock(&data->deathchecker);
+				case_death(data);
 				return (NULL);
 			}
 			pthread_mutex_unlock(&data->philo[i].lunchchecker);
+			food_check(data);
 			i++;
 		}
 	}
@@ -98,16 +105,5 @@ void	*process_func(void *arg)
 		if (print_msg(philo, "is thinking"))
 			return (NULL);
 	}
-	return (NULL);
-}
-
-void	*just_one_philo(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	print_msg(philo, "taken a fork");
-	my_usleep(philo->data->t_t_die, philo);
-	print_msg(philo, "died");
 	return (NULL);
 }
