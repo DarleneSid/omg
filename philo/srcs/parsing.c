@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:21:08 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/11 12:39:36 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:54:58 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,13 @@ long long int	ft_atoi(char *n)
 int	check_amount_ph(int ac, char **av)
 {
 	int	i;
+	int	val;
 
 	i = 2;
-	if (ft_atoi(av[1]) > 200)
+	val = ft_atoi(av[1]);
+	if (val == -1)
+		return (1);
+	if (val > 200)
 	{
 		printf("MAX AMOUNT OF PHILOS IS 200, YOU PUT %s\n", av[1]);
 		return (1);
