@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:18:33 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/10 00:00:24 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:24:34 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ typedef struct t_philo
 
 /*		PARSING		*/
 int			check_valid_args(char **av);
-int			ft_atoi(char *n);
+long long int			ft_atoi(char *n);
+int			check_amount_ph(char **av);
 
 /*		PHILO		*/
 long int	gettodaystime(void);
