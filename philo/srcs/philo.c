@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:19:10 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/11 12:40:36 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 13:13:06 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	*setting_time(void *arg)
 void	init(t_data *data, char **av, int ac)
 {
 	data->t_t_die = ft_atoi(av[2]);
-	data->t_t_sleep = ft_atoi(av[3]);
-	data->t_t_eat = ft_atoi(av[4]);
+	data->t_t_sleep = ft_atoi(av[4]);
+	data->t_t_eat = ft_atoi(av[3]);
 	data->max_eat = -1;
 	if (ac == 6)
 		data->max_eat = ft_atoi(av[5]);
