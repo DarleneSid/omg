@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:19:10 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/11 11:55:57 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:40:36 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 		return (printf("NOT VALID AMOUNT OF ARGUMENTS\n"), 1);
-	if (check_valid_args(av) || check_amount_ph(av))
+	if (check_valid_args(av) || check_amount_ph(ac, av))
 		exit(1);
 	data.nb_philo = ft_atoi(av[1]);
 	philo = calloc(sizeof(t_philo), data.nb_philo);

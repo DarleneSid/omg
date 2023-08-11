@@ -6,7 +6,7 @@
 /*   By: dsydelny <dsydelny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:21:08 by dsydelny          #+#    #+#             */
-/*   Updated: 2023/08/11 12:24:26 by dsydelny         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:39:36 by dsydelny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	len_arg(char *s)
 		i++;
 	return (i);
 }
+
 int	check_valid_args(char **av)
 {
 	int	n_av;
@@ -50,7 +51,7 @@ int	check_valid_args(char **av)
 
 long long int	ft_atoi(char *n)
 {
-	int	res;
+	long long int	res;
 	int	i;
 
 	res = 0;
@@ -61,18 +62,27 @@ long long int	ft_atoi(char *n)
 	{
 		res = res * 10 + n[i] - '0';
 		if (res > 2147483647)
-			return (write (2, "NUMBER IS TOO BIG\n", 18), 0);
+			return (write (2, "NUMBER IS TOO BIG\n", 18), -1);
 		i++;
 	}
 	return (res);
 }
 
-int	check_amount_ph(char **av)
+int	check_amount_ph(int ac, char **av)
 {
+	int	i;
+
+	i = 2;
 	if (ft_atoi(av[1]) > 200)
 	{
 		printf("MAX AMOUNT OF PHILOS IS 200, YOU PUT %s\n", av[1]);
 		return (1);
+	}
+	while (i < ac)
+	{
+		if (ft_atoi(av[i]) == -1)
+			return (1);
+		i++;
 	}
 	return (0);
 }
